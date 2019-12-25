@@ -1,0 +1,40 @@
+given some anime files, sort them into subdirectories of the given root directory by series name.
+
+Notes
+-----
+* the 'rename' function is used to move the files. if you download to one filesystem and then sort them to another, you should feel ashamed. go apologize to your drives unless it's a ramdisk.
+* filenames must be ascii without new lines in them.
+* options are parsed before the list of files to sort, so you must use the same options for all files.
+* Unless you use the command line option, subdirectories will not be made automatically. This is to eliminate the chance of wrong copy destination due to bad name parsing.
+* It will not overwrite if the destination file exists in the sorted directory. It will fail.
+
+Compiling
+---------
+First, compile and install https://github.com/MyLegGuy/localAnimeList/tree/master/getAnimeFilename
+	   It has its own compilation instructions, so read those too.
+Once it's installed, modify GETEPISODEFILENAMECOMMAND in main.c to put the correct path to `getAnimeFilename` executable. By default it's /usr/local/bin/getAnimeFilename
+Compile with `gcc main.c`
+
+Usage
+-----
+You pass the root sort destination and then the files you want to sort.
+Example:
+./a.out ~/Anime/ "~/Downloads/ShowA - 01.mkv" "~/Downloads/[GoodSubs] ShowA - 02 [60millionp].mkv" "~/Downloads/ShowB.S01E43.mkv"
+Run with --help for more options
+
+Alias
+-----
+sometimes, the file has a different name than your folders. fix this with alias file.
+
+format of the file:
+<series name in filename>
+<folder name>
+<series name in filename #2>
+<folder name #2>
+[...]
+
+example to fix a name that was destroyed for windows users:
+Some Name
+Some Name?
+
+Pass the list using the `-a <list filename>` option. you may also want to pass the `-f` option.
