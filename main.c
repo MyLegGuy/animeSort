@@ -95,7 +95,6 @@ char readAliasList(const char* _file){
 	return _ret;
 }
 #endif
-
 FILE* goodpopen(char* const _args[]){
 	int _crossFiles[2]; // File descriptors that work for both processes
 	if (pipe(_crossFiles)!=0){
@@ -219,7 +218,7 @@ char sort(const char* _sortThis, const char* _rootAnimeFolder){
 		if (canMakeSubdirectory){
 			if (!isSimulation){
 				errno=0;
-				if (mkdir(_specificAnimeFolder,700)){ // true chads don't let anybody else touch their stuff
+				if (mkdir(_specificAnimeFolder,S_IRUSR | S_IWUSR | S_IEXEC )){ // true chads don't let anybody else touch their stuff
 					fprintf(stderr,"makedir %s: %s\n",_specificAnimeFolder,strerror(errno));
 					_ret=1;
 					goto freelocal;
